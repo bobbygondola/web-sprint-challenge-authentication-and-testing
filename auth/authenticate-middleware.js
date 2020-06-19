@@ -1,8 +1,9 @@
-/* 
-  complete the middleware code to check if the user is logged in
-  before granting access to the next middleware/route handler
-*/
-
-module.exports = (req, res, next) => {
-  res.status(401).json({ you: 'shall not pass!' });
-};
+//middleware
+module.exports=(req,res,next) => {
+  const logged = req.session.user;
+  if(logged){
+      next()
+  } else {
+      res.status(401).json({message: "You must login first before accessing the JOKES!"})
+  }
+}
